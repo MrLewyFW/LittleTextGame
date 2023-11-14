@@ -1,0 +1,14 @@
+D:\CSHARP\Tekstowa\Tekstowa\bin\Debug\net6.0\Tekstowa.exe
+D:\CSHARP\Tekstowa\Tekstowa\bin\Debug\net6.0\Tekstowa.deps.json
+D:\CSHARP\Tekstowa\Tekstowa\bin\Debug\net6.0\Tekstowa.runtimeconfig.json
+D:\CSHARP\Tekstowa\Tekstowa\bin\Debug\net6.0\Tekstowa.dll
+D:\CSHARP\Tekstowa\Tekstowa\bin\Debug\net6.0\Tekstowa.pdb
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.AssemblyInfoInputs.cache
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.AssemblyInfo.cs
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.csproj.CoreCompileInputs.cache
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.dll
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\refint\Tekstowa.dll
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.pdb
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\Tekstowa.genruntimeconfig.cache
+D:\CSHARP\Tekstowa\Tekstowa\obj\Debug\net6.0\ref\Tekstowa.dll
