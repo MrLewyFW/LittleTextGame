@@ -33,11 +33,12 @@ namespace Tekstowa
 
         public int UzyjPrzedmiotu(string nazwa)
         {
+            nazwa = nazwa.ToLower();
             if (nazwa == "wróć")
                 return 2;
             foreach(PrzedmiotUzytkowy przedmiot in gracz.Ekwipunek)
             {
-                if(przedmiot.Nazwa == nazwa)
+                if(przedmiot.Nazwa.ToLower() == nazwa)
                 {
                     przedmiot.Ulecz(gracz);
                     gracz.Ekwipunek.Remove(przedmiot);

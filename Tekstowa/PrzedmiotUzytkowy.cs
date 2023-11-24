@@ -13,7 +13,7 @@ namespace Tekstowa
 
         public void Ulecz(Postac postac)
         {
-            if(postac.Nazwa=="Zombie")
+            if (postac.NormalneLeczenie == false)
             {
                 int minusIleOdnawia = IleOdnawia * -1;
                 postac.CurrentHP += minusIleOdnawia;

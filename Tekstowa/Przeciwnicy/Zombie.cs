@@ -13,11 +13,11 @@ namespace Tekstowa
         public Zombie()
         {
             Nazwa = "Zombie";
+            NormalneLeczenie = false;
             Exp = 100;
             MaxHP = 40;
             CurrentHP = MaxHP;
             AP = 10;
-            ModAP = AP;
             MP = 0;
             Sila = 10;
             Wytrzymalosc = 5;

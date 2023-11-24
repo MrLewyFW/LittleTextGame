@@ -19,7 +19,6 @@ namespace Tekstowa
         }
         public override void Opis()
         {
-            
             if (gracz.IloscNextLvl > 0)
             {
                 Punkty();
@@ -28,23 +27,30 @@ namespace Tekstowa
 
         public override void WykonanieKomendy(string komenda)
         {
-            switch(komenda)
+            switch(komenda.ToLower())
             {
-                case "Siła":
-                    graczStatystyki.ZwiekszSile();
+                case "siła":
+                    ZwiekszSile();
                     Opis();
                     break;
-                case "Wytrzymałość":
-                    graczStatystyki.ZwiekszWytrzymalosc();
+                case "wytrzymałość":
+                    ZwiekszWytrzymalosc();
                     Opis();
                     break;
-                case "Magia":
-                    graczStatystyki.ZwiekszMagie();
+                case "magia":
+                    ZwiekszMagie();
                     Opis();
                     break;
-                case "Szczęście":
-                    graczStatystyki.ZwiekszSzczescie();
-                    Opis();
+                case "szczęście":
+                    if (ZwiekszSczescie())
+                    {
+                        Opis();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie możesz już bardziej rozwinąć swojego szczęścia");
+                        OczekujNaKomende();
+                    }
                     break;
                 default:
                     Console.WriteLine($"Nie ma tekiej statystyki jak: {komenda}");
@@ -57,8 +63,29 @@ namespace Tekstowa
         {
             Console.WriteLine("Czujesz, że wraz z nowym doświadczeniem stałeś się lepszy.");
             Console.WriteLine($"Ilość punktów umiejętności do rozdysponowania: {gracz.IloscNextLvl}");
-            graczStatystyki.Wyswietl();
+            WyswietlStatystyki();
             OczekujNaKomende();
+        }
+
+        public void WyswietlStatystyki()
+        {
+            graczStatystyki.Wyswietl();
+        }
+        public void ZwiekszSile()
+        {
+            graczStatystyki.ZwiekszSile();
+        }
+        public void ZwiekszWytrzymalosc()
+        {
+            graczStatystyki.ZwiekszWytrzymalosc();
+        }
+        public void ZwiekszMagie()
+        {
+            graczStatystyki.ZwiekszMagie();
+        }
+        public bool ZwiekszSczescie()
+        {
+            return graczStatystyki.ZwiekszSzczescie();
         }
     }
 }

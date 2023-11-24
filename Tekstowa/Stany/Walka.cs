@@ -28,53 +28,31 @@ namespace Tekstowa
         }
         public override void WykonanieKomendy(string komenda)
         {
-            switch (komenda)
+            switch (komenda.ToLower())
             {
                 case "atak":
-                    przeciwnikWalka.Wpierdol();
-                    if (przeciwnik.CurrentHP <= 0)
-                    {
-                        fabula.ZmianaStanu(new KoniecWalki(fabula, gracz, przeciwnik));
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Teraz {przeciwnik.Nazwa} wykonuje ruch!");
-                        przeciwnikWalka.WyliczSzanse();
-                        SprawdzCzySmierc();
-                    }  
+                    Atak();
+                    SprawdzCzyKoniecWalki();
                     break;
-                case "bron":
-                    graczWalka.Bron();
-                    przeciwnikWalka.WyliczSzanse();
+                case "obrona":
+                    Obrona();
+                    PrzeciwnikTura();
                     SprawdzCzySmierc();
                     break;
                 case "ekwipunek":
-                    graczEkwipunek.WyswietlEkwipunek();
+                    Ekwipunek();
                     OczekujNaKomende();
                     break;
                 case "przedmiot":
                     Console.WriteLine("Wpisz nazwę przedmiotu, którego chcesz użyć:");
-                    int returned = graczEkwipunek.UzyjPrzedmiotu(Console.ReadLine());
-                    if (returned==1)
-                    {
-                        przeciwnikWalka.WyliczSzanse();
-                        SprawdzCzySmierc();
-                    }
-                    else if(returned==2)
-                    {
-                        OczekujNaKomende();
-                    }
-                    else
-                    {
-                        WykonanieKomendy("przedmiot");
-                    }
+                    PrzedmiotRezultat();
                     break;
-                case "komendy":
-                    Console.WriteLine("Aktualne dostępne komendy to: atak, bron, ekwipunek, przedmiot, komendy");
+                case "akcje":
+                    Console.WriteLine("Aktualne dostępne akcje to: atak, obrona, ekwipunek, przedmiot, akcje");
                     OczekujNaKomende();
                     break;
                 default:
-                    Console.WriteLine($"Nie znam takiej komendy jak {komenda}, wpisz 'komendy' aby poznać dostępne komendy");
+                    Console.WriteLine($"Nie znam takiej akcji jak {komenda}, wpisz 'akcje' aby poznać dostępne komendy");
                     OczekujNaKomende();
                     break;
 
@@ -90,13 +68,83 @@ namespace Tekstowa
         public void SprawdzCzySmierc()
         {
             if (gracz.CurrentHP <= 0)
-                fabula.ZmianaStanu(new Smierc(fabula, gracz));
+            {
+                Smierc();
+            }
             else
             {
-                graczWalka.ResetModAP();
+                ResetMod();
                 OczekujNaKomende();
             }
                 
+        }
+
+        public void SprawdzCzyKoniecWalki()
+        {
+            if (przeciwnik.CurrentHP <= 0 || przeciwnikWalka.CzyUciekl)
+            {
+                ResetMod();
+                KoniecWalki();
+            }
+            else
+            {
+                PrzeciwnikTura();
+                SprawdzCzySmierc();
+            }
+        }
+
+        public void PrzedmiotRezultat()
+        {
+            int returned = graczEkwipunek.UzyjPrzedmiotu(Console.ReadLine());
+            if (returned == 1)
+            {
+                SprawdzCzySmierc();
+                PrzeciwnikTura();
+                SprawdzCzySmierc();
+            }
+            else if (returned == 2)
+            {
+                OczekujNaKomende();
+            }
+            else
+            {
+                WykonanieKomendy("przedmiot");
+            }
+        }
+
+        public void PrzeciwnikTura()
+        {
+            Console.WriteLine($"Teraz {przeciwnik.Nazwa} wykonuje ruch!");
+            przeciwnikWalka.WyliczSzanse();
+        }
+
+        public void KoniecWalki()
+        {
+            fabula.ZmianaStanu(new KoniecWalki(fabula, gracz, przeciwnik, przeciwnikWalka.CzyUciekl));
+        }
+
+        public void Smierc()
+        {
+            fabula.ZmianaStanu(new Smierc(fabula, gracz));
+        }
+
+        public void Obrona()
+        {
+            graczWalka.Bron();
+        }
+        
+        public void Atak()
+        {
+            przeciwnikWalka.Wpierdol();
+        }
+
+        public void Ekwipunek()
+        {
+            graczEkwipunek.WyswietlEkwipunek();
+        }
+        public void ResetMod()
+        {
+            graczWalka.ResetModAP();
         }
     }
 }

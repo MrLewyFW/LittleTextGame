@@ -34,7 +34,7 @@ namespace Tekstowa
             if (wartoscAtaku < 0)
                 wartoscAtaku = 0;
             Console.WriteLine($"{przeciwnik.Nazwa} atakuje zadając {wartoscAtaku} punktów obrażeń");
-            graczWalka.Reakcja(wartoscAtaku);
+            GraczReakcja(wartoscAtaku);
         }
 
         public void Bron()
@@ -65,7 +65,8 @@ namespace Tekstowa
 
         public void Wpierdol()
         {
-            int wartoscAtaku = graczWalka.ObliczWartoscAtaku() - ModAP;
+            
+            int wartoscAtaku = GraczObliczWartoscAtaku() - ModAP;
             if (wartoscAtaku < 0)
                 wartoscAtaku = 0;
             Console.WriteLine($"Atakujesz {przeciwnik.Nazwa} zadając {wartoscAtaku} obrażeń.");
@@ -141,33 +142,47 @@ namespace Tekstowa
                     ObronaProcent = 30;
                 }
             }
-            int wybor = rand.Next(0, 100);
-            int czyPomoc = rand.Next(0, 100);
+            int wybor = rand.Next(1, 101);
+            int czyPomoc = rand.Next(1, 101);
             double luckyX = rand.NextDouble();
-            if (wybor > 0 && wybor < AtakProcent)
+            if (wybor > 0 && wybor <= AtakProcent)
             {
                 if (czyPomoc < przeciwnik.Szczescie)
                     Atakuj(luckyX);
                 else
                     Atakuj(luckyX / 2);
             }
-            else if (wybor > AtakProcent && wybor < AtakProcent + ObronaProcent)
+            else if (wybor > AtakProcent && wybor <= AtakProcent + ObronaProcent)
             {
                 Bron();
             }
-            else if (wybor > AtakProcent + ObronaProcent && wybor < AtakProcent + ObronaProcent + UciekajProcent)
+            else if (wybor > AtakProcent + ObronaProcent && wybor <= AtakProcent + ObronaProcent + UciekajProcent)
             {
                 Uciekaj();
             }
             else
             {
-                przeciwnikEkwipunek.UzyjPrzedmiotu();
+                UzyjPrzedmiotu();
             }
         }
 
         public void ResetModAP()
         {
             ModAP = przeciwnik.AP;
+        }
+
+        public void GraczReakcja(int wartoscAtaku)
+        {
+            graczWalka.Reakcja(wartoscAtaku);
+        }
+
+        public void UzyjPrzedmiotu()
+        {
+            przeciwnikEkwipunek.UzyjPrzedmiotu();
+        }
+        public int GraczObliczWartoscAtaku()
+        {
+            return graczWalka.ObliczWartoscAtaku();
         }
     }
 }

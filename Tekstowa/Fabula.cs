@@ -9,16 +9,24 @@ namespace Tekstowa
     internal class Fabula
     {
         private Stan stan;
+        public Mapa mapa;
         public Gracz gracz = new Gracz();
         public void Wprowadzenie()
         {
-            ZmianaStanu(new Walka(this, gracz, new Zombie()));
+            ZmianaMapy(new Polany(this));
+            //ZmianaStanu(new Walka(this, gracz, new Zombie()));
         }
 
         public void ZmianaStanu(Stan stan)
         {
             this.stan = stan;
             this.stan.Opis();
+        }
+
+        public void ZmianaMapy(Mapa mapa)
+        {
+            this.mapa = mapa;
+            mapa.Dzialanie();
         }
 
     }

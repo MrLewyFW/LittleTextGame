@@ -38,10 +38,16 @@ namespace Tekstowa
             gracz.MP = gracz.Magia * 5;
             gracz.IloscNextLvl--;
         }
-        public void ZwiekszSzczescie()
+        public bool ZwiekszSzczescie()
         {
-            gracz.Szczescie++;
-            gracz.IloscNextLvl--;
+            if(gracz.Szczescie<30)
+            {
+                gracz.Szczescie++;
+                gracz.IloscNextLvl--;
+                return true;
+            }
+            return false;
+            
         }
     }
 }
